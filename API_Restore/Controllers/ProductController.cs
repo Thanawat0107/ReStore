@@ -27,5 +27,6 @@ namespace API_Restore.Controllers
         {
             return Ok(await _db.Products.FirstOrDefaultAsync(x => x.Id == id));
         }
+
     }
 }
