@@ -1,11 +1,11 @@
 import { Avatar, Button, Card, CardActionArea, CardActions, CardContent, CardHeader, CardMedia, Typography } from "@mui/material";
-import { Product } from "../../app/models/productIModel";
+import { Product } from "../../../models/productIModel";
 
 interface Props {
   product: Product;
 };
 
-export default function ProductCart({ product }: Props) {
+export default function ProductCard({ product }: Props) {
   return (
     <Card>
       <CardHeader avatar={

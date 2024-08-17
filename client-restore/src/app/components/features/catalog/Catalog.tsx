@@ -1,4 +1,4 @@
-import { Product } from "../../app/models/productIModel";
+import { Product } from "../../../models/productIModel";
 import ProductList from "./ProductList";
 import { useState, useEffect } from "react";
 
