@@ -5,8 +5,8 @@ import {
   ThemeProvider,
 } from "@mui/material";
 
-import { useState } from "react";
 import "./App.css";
+import { useState } from "react";
 import AllRoutes from "../routes/AllRoutes";
 import { Header } from "../components/layout";
 
