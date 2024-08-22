@@ -1,5 +1,8 @@
 using API_Restore.Data;
+using API_Restore.Services.IServices;
+using API_Restore.Services;
 using Microsoft.EntityFrameworkCore;
+using API_Restore.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,11 +17,17 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IFileUpload, FileUpload>();
+
+
 builder.Services.AddCors();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
+
+app.UseMiddleware<ExceptionMiddleware>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

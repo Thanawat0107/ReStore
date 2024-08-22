@@ -65,7 +65,7 @@ export default function ProductCard({ product }: Props) {
           Add to cart
         </Button>
       </CardActions> */}
-      <Box sx={{ padding: 2 }}>
+      <Box>
         <Button variant="contained" color="error" fullWidth size="large">
           Add to cart
         </Button>

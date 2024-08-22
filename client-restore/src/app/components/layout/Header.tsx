@@ -18,13 +18,14 @@ interface Props {
 }
 
 const midLinks = [
+  { title: "home", path: "/" },
   { title: "catalog", path: "/catalog" },
   { title: "about", path: "/about" },
   { title: "contact", path: "/contact" },
 ];
 
 const rightLinks = [
-  { title: "login", path: "/login" },
+  // { title: "login", path: "/login" },
   { title: "register", path: "/register" },
 ];
 
@@ -44,7 +45,7 @@ export default function Header({ themeMode, handleTheme }: Props) {
   return (
     <AppBar position="static" sx={{ mb: 4 }}>
       <Toolbar sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
-        <Box>
+        <Box sx={{marginRight: '50px;'}}>
           <Typography
             variant="h6"
             component={NavLink}
@@ -66,7 +67,7 @@ export default function Header({ themeMode, handleTheme }: Props) {
         <Box sx={{display: "flex", alignItems: "center"}}>
           <Switch checked={themeMode} onChange={handleTheme} />
           <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
-            <Badge badgeContent="4" color="error">
+            <Badge badgeContent="4" color="secondary">
               <ShoppingCart />
             </Badge>
           </IconButton>

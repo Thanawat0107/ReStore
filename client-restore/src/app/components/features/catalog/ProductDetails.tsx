@@ -29,7 +29,11 @@ export default function ProductDetails({}: Props) {
       <Grid item xs={6}>
         <Typography variant='h3'>{data.name}</Typography>
         <Divider sx={{mb: 2}}/>
-        <Typography variant='h4'>{data.price.toLocaleString('th-TH', { style: 'currency', currency: 'THB' })}</Typography>
+        <Typography variant='h4'>
+          {data.price.toLocaleString('th-TH',
+            { style: 'currency', currency: 'THB' })
+          }
+        </Typography>
         <TableContainer>
           <Table>
             <TableBody>

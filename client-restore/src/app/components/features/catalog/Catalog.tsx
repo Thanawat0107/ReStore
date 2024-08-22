@@ -1,3 +1,4 @@
+import { baseUrlAPI } from "../../../common/SD";
 import { useTitle } from "../../../hooks/useTitle";
 import { Product } from "../../../models/productIModel";
 import ProductList from "./ProductList";
@@ -12,7 +13,7 @@ export default function Catalog({ }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    fetch("https://localhost:44376/api/Product")
+    fetch(`${baseUrlAPI}Product`)
       .then((response) => response.json())
       .then((data) => setProducts(data));
   }, []);

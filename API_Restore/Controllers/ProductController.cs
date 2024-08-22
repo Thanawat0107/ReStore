@@ -6,9 +6,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API_Restore.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ProductController : ControllerBase
+    //[Route("api/[controller]")]
+    //[ApiController]
+    public class ProductController : BaseApiController
     {
         private readonly StoreContext _db;
         public ProductController(StoreContext db)
