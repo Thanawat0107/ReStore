@@ -8,206 +8,110 @@ namespace API_Restore.Data
         {
             if (context.Products.Any()) return;
 
-            var pathImg = "/images/products";
+            var path = "/images/products";
 
             var products = new List<Product>
             {
                 new Product
                 {
-                    Name = "Angular Speedster Board 2000",
-                    Description =
-                        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 20000,
-                    PictureUrl = $"{pathImg}/sb-ang1.png",
-                    Brand = "Angular",
+                    Name = "Eco-Friendly Skateboard",
+                    Description = "Made from recycled materials, this skateboard is perfect for the environmentally conscious rider.",
+                    Price = 22000,
+                    PictureUrl = $"{path}/EcoBoard-Boards1.jpg",
+                    Brand = "EcoBoard",
                     Type = "Boards",
-                    QuantityInStock = 100
+                    QuantityInStock = 150
                 },
                 new Product
                 {
-                    Name = "Green Angular Board 3000",
-                    Description = "Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus.",
-                    Price = 15000,
-                    PictureUrl = $"{pathImg}/sb-ang2.png",
-                    Brand = "Angular",
-                    Type = "Boards",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Core Board Speed Rush 3",
-                    Description =
-                        "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
+                    Name = "Bamboo Cruiser Board",
+                    Description = "Smooth riding with a sleek bamboo finish, ideal for city cruising.",
                     Price = 18000,
-                    PictureUrl = $"{pathImg}/sb-core1.png",
-                    Brand = "NetCore",
+                    PictureUrl = $"{path}/BambooBoard-Boards2.jpg",
+                    Brand = "BambooBoard",
                     Type = "Boards",
-                    QuantityInStock = 100
+                    QuantityInStock = 120
                 },
                 new Product
                 {
-                    Name = "Net Core Super Board",
-                    Description =
-                        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-                    Price = 30000,
-                    PictureUrl = $"{pathImg}/sb-core2.png",
-                    Brand = "NetCore",
-                    Type = "Boards",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "React Board Super Whizzy Fast",
-                    Description =
-                        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+                    Name = "Alpine Snowboard",
+                    Description = "Designed for the toughest slopes, offering unparalleled control and speed.",
                     Price = 25000,
-                    PictureUrl = $"{pathImg}/sb-react1.png",
-                    Brand = "React",
+                    PictureUrl = $"{path}/AlpineSports-Boards3.jpg",
+                    Brand = "AlpineSports",
                     Type = "Boards",
-                    QuantityInStock = 100
+                    QuantityInStock = 80
                 },
                 new Product
                 {
-                    Name = "Typescript Entry Board",
-                    Description =
-                        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 12000,
-                    PictureUrl = $"{pathImg}/sb-ts1.png",
-                    Brand = "TypeScript",
-                    Type = "Boards",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Core Blue Hat",
-                    Description =
-                        "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 1000,
-                    PictureUrl = $"{pathImg}/hat-core1.png",
-                    Brand = "NetCore",
+                    Name = "Urban Snapback Hat",
+                    Description = "Stay stylish and cool with this versatile snapback, perfect for any urban setting.",
+                    Price = 3000,
+                    PictureUrl = $"{path}/UrbanWear-Hats1.jpg", 
+                    Brand = "UrbanWear",
                     Type = "Hats",
-                    QuantityInStock = 100
+                    QuantityInStock = 200
                 },
                 new Product
                 {
-                    Name = "Green React Woolen Hat",
-                    Description =
-                        "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
+                    Name = "Wool Beanie",
+                    Description = "Keep warm in the winter with this comfortable wool beanie, available in multiple colors.",
+                    Price = 5000,
+                    PictureUrl = $"{path}/WinterStyle-Hats2.jpg",
+                    Brand = "WinterStyle",
+                    Type = "Hats",
+                    QuantityInStock = 180
+                },
+                new Product
+                {
+                    Name = "Leather Gloves",
+                    Description = "Premium leather gloves offering warmth and style, perfect for cold weather.",
                     Price = 8000,
-                    PictureUrl = $"{pathImg}/hat-react1.png",
-                    Brand = "React",
-                    Type = "Hats",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Purple React Woolen Hat",
-                    Description =
-                        "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 1500,
-                    PictureUrl = $"{pathImg}/hat-react2.png",
-                    Brand = "React",
-                    Type = "Hats",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Blue Code Gloves",
-                    Description =
-                        "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 1800,
-                    PictureUrl = $"{pathImg}/glove-code1.png",
-                    Brand = "VS Code",
+                    PictureUrl = $"{path}/LuxGloves-Gloves1.jpg",
+                    Brand = "LuxGloves",
                     Type = "Gloves",
                     QuantityInStock = 100
                 },
                 new Product
                 {
-                    Name = "Green Code Gloves",
-                    Description =
-                        "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 1500,
-                    PictureUrl = $"{pathImg}/glove-code2.png",
-                    Brand = "VS Code",
-                    Type = "Gloves",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Purple React Gloves",
-                    Description =
-                        "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 1600,
-                    PictureUrl = $"{pathImg}/glove-react1.png",
-                    Brand = "React",
-                    Type = "Gloves",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Green React Gloves",
-                    Description =
-                        "Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 1400,
-                    PictureUrl = $"{pathImg}/glove-react2.png",
-                    Brand = "React",
-                    Type = "Gloves",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Redis Red Boots",
-                    Description =
-                        "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-                    Price = 25000,
-                    PictureUrl = $"{pathImg}/boot-redis1.png",
-                    Brand = "Redis",
+                    Name = "Classic Hiking Boots",
+                    Description = "Durable and comfortable, these boots are made for long hikes and outdoor adventures.",
+                    Price = 30000,
+                    PictureUrl = $"{path}/TrailMaster-Boots1.jpg",
+                    Brand = "TrailMaster",
                     Type = "Boots",
-                    QuantityInStock = 100
+                    QuantityInStock = 75
                 },
                 new Product
                 {
-                    Name = "Core Red Boots",
-                    Description =
-                        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo magna eros quis urna.",
-                    Price = 18999,
-                    PictureUrl = $"{pathImg}/boot-core2.png",
-                    Brand = "NetCore",
+                    Name = "Waterproof Trekking Boots",
+                    Description = "Perfect for wet conditions, these waterproof boots ensure dry and safe trekking.",
+                    Price = 32000,
+                    PictureUrl = $"{path}/OutdoorPro-Boots2.jpg",
+                    Brand = "OutdoorPro",
                     Type = "Boots",
-                    QuantityInStock = 100
+                    QuantityInStock = 90
                 },
                 new Product
                 {
-                    Name = "Core Purple Boots",
-                    Description =
-                        "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et orci.",
-                    Price = 19999,
-                    PictureUrl = $"{pathImg}/boot-core1.png",
-                    Brand = "NetCore",
-                    Type = "Boots",
-                    QuantityInStock = 100
-                },
-                new Product
-                {
-                    Name = "Angular Purple Boots",
-                    Description = "Aenean nec lorem. In porttitor. Donec laoreet nonummy augue.",
+                    Name = "Vintage Leather Backpack",
+                    Description = "A stylish vintage leather backpack, perfect for everyday use or travel.",
                     Price = 15000,
-                    PictureUrl = $"{pathImg}/boot-ang2.png",
-                    Brand = "Angular",
-                    Type = "Boots",
-                    QuantityInStock = 100
+                    PictureUrl = $"{path}/VintagePack-Accessories1.jpg",
+                    Brand = "VintagePack",
+                    Type = "Accessories",
+                    QuantityInStock = 50
                 },
                 new Product
                 {
-                    Name = "Angular Blue Boots",
-                    Description =
-                        "Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. Ut nonummy.",
-                    Price = 18000,
-                    PictureUrl = $"{pathImg}/boot-ang1.png",
-                    Brand = "Angular",
-                    Type = "Boots",
-                    QuantityInStock = 100
-                },
+                    Name = "Canvas Messenger Bag",
+                    Description = "Durable and spacious, this canvas messenger bag is great for work or school.",
+                    Price = 13000,
+                    PictureUrl = $"{path}/UrbanGear-Accessories2.jpg",
+                    Brand = "UrbanGear",
+                    Type = "Accessories",
+                    QuantityInStock = 60
+                }
             };
 
             foreach (var item in products)

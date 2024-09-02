@@ -17,7 +17,7 @@ namespace API_Restore.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Product>>> GetAll()
+        public async Task<ActionResult<IEnumerable<Product>>> GetAll()
         {
             return Ok(await _db.Products.ToListAsync());
         }
@@ -25,7 +25,10 @@ namespace API_Restore.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetById(int id)
         {
-            return Ok(await _db.Products.FirstOrDefaultAsync(x => x.Id == id));
+            var product = await _db.Products.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (product == null) return NotFound();
+            return Ok(product);
         }
 
     }

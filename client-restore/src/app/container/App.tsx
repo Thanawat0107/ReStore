@@ -7,8 +7,10 @@ import {
 
 import "./App.css";
 import { useState } from "react";
-import AllRoutes from "../routes/AllRoutes";
 import { Header } from "../components/layout";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css"
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [themeMode, setThemeMode] = useState(false);
@@ -28,10 +30,11 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
       <CssBaseline />
       <Header themeMode={themeMode} handleTheme={handleTheme} />
       <Container>
-        <AllRoutes/>
+        <Outlet/>
       </Container>
     </ThemeProvider>
   );

@@ -7,13 +7,13 @@ namespace API_Restore.Controllers
     [ApiController]
     public class BuggyController : BaseApiController
     {
-        [HttpGet("not-found")]
+        [HttpGet("not-found")] //ไม่พบทรัพยากรที่ร้องขอ
         public ActionResult GetNotFound()
         {
             return NotFound();
         }
         
-        [HttpGet("bad-request")]
+        [HttpGet("bad-request")] //การส่งคืนข้อผิดพลาดใน HTTP APIs
         public ActionResult GetBadRequest()
         {
             return BadRequest(new ProblemDetails {Title = "This is a bad request"});
@@ -25,6 +25,9 @@ namespace API_Restore.Controllers
             return Unauthorized();
         }
 
+        // ถูกใช้เพื่อส่งคืนรหัสสถานะ 400 พร้อมการตอบกลับ ProblemDetails
+        // ที่รวมถึงข้อผิดพลาดในการตรวจสอบความถูกต้อง 
+        // ModelState ใช้ในการเพิ่มข้อผิดพลาดที่อธิบายว่าสิ่งใดผิดพลาด
         [HttpGet("validation-error")]
         public ActionResult GetValidationError()
         {

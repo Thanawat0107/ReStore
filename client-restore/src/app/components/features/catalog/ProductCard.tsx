@@ -23,8 +23,7 @@ export default function ProductCard({ product }: Props) {
       <CardActionArea component={Link} to={`/catalog/${product.id}`}>
         <CardMedia
           sx={{
-            height: 140,
-            backgroundSize: "contain",
+            height: 200,
             backgroundColor: "#cfd8dc",
           }}
           image={product.pictureUrl}
