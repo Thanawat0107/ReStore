@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Grid,
   IconButton,
   Paper,
@@ -20,6 +21,7 @@ import BasketSummary from "./BasketSummary";
 import { currencyFormat } from "../../../util/util";
 import { useState } from "react";
 import { LoadingButton } from "@mui/lab";
+import { Link } from "react-router-dom";
 
 type Props = {};
 
@@ -114,6 +116,16 @@ export default function BasketPage({}: Props) {
         <Grid item xs={9} />
         <Grid item xs={3}>
           <BasketSummary />
+          <Button component={Link} 
+            to="/checkout"
+            variant="contained"
+            size="small"
+            fullWidth
+            color="success"
+            sx={{borderRadius: "20px"}}
+          >
+            Checkout
+          </Button>
         </Grid>
       </Grid>
     </>
