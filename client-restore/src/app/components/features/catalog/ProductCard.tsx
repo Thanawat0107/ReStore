@@ -1,6 +1,5 @@
 import {
   Box,
-  Button,
   Card,
   CardActionArea,
   CardContent,
@@ -10,12 +9,29 @@ import {
 } from "@mui/material";
 import { Product } from "../../../models/productIModel";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { Apis } from "../../../api/Apis";
+import { LoadingButton } from "@mui/lab";
+import { useStoreContext } from "../../../context/StoreContext";
+import { currencyFormat } from "../../../util/util";
+
 
 interface Props {
   product: Product;
 }
 
 export default function ProductCard({ product }: Props) {
+  const [loading, setLoading] = useState(false);
+  const {setBasket} = useStoreContext();
+
+  function handleAddItem(productId: number) {
+    setLoading(true);
+    Apis.Basket.addItem(productId)
+    .then(basket => setBasket(basket))
+    .catch(error => console.log(error))
+    .finally(() => setLoading(false));
+  }
+  
   return (
     <Card
       sx={{ borderRadius: "20px;", width: 320, maxWidth: "100%", boxShadow: 3 }}
@@ -38,10 +54,7 @@ export default function ProductCard({ product }: Props) {
           </Typography>
           <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
             <Typography variant="h6" sx={{ fontWeight: "bold", mr: 1 }}>
-              {product.price.toLocaleString("th-TH", {
-                style: "currency",
-                currency: "THB",
-              })}
+              {currencyFormat(product.price)}
             </Typography>
             <Chip
               label="Lowest price"
@@ -65,10 +78,13 @@ export default function ProductCard({ product }: Props) {
         </Button>
       </CardActions> */}
       <Box>
-        <Button variant="contained" color="error" fullWidth size="large">
-          Add to cart
-        </Button>
+        <LoadingButton 
+          loading={loading}
+          onClick={() => handleAddItem(product.id)} 
+          variant="contained" color="error" fullWidth size="large">
+            Add to cart
+        </LoadingButton>
       </Box>
     </Card>
-  );
+  );  
 }

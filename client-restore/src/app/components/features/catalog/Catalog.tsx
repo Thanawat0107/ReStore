@@ -6,6 +6,7 @@ import ProductList from "./ProductList";
 import { useState, useEffect } from "react";
 
 interface Props {
+
 };
 
 export default function Catalog({}: Props) {
@@ -15,9 +16,11 @@ export default function Catalog({}: Props) {
 
   useEffect(() => {
     Apis.Catalog.list()
-    .then(products => setProducts(products))
+    .then(products => {
+      setProducts(products)
+    })
     .catch(error => console.log(error))
-    .finally(() => setLoading(false))
+    .finally(() => setLoading(false));
   }, []);
 
   if (loading) return <Loading message="Loading products..."/>

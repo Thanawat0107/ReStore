@@ -10,7 +10,8 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { useStoreContext } from "../../context/StoreContext";
 
 interface Props {
   themeMode: boolean;
@@ -19,13 +20,12 @@ interface Props {
 
 const midLinks = [
   { title: "home", path: "/" },
-  { title: "catalog", path: "/catalog" },
-  { title: "about", path: "/about" },
+  { title: "product", path: "/catalog" },
+  // { title: "about", path: "/about" },
   { title: "contact", path: "/contact" },
 ];
 
 const rightLinks = [
-  // { title: "login", path: "/login" },
   { title: "register", path: "/register" },
 ];
 
@@ -42,8 +42,11 @@ const navStyles = {
 };
 
 export default function Header({ themeMode, handleTheme }: Props) {
+  const {basket} = useStoreContext();
+  const itemCount = basket?.basketItems.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
-    <AppBar position="static" sx={{ mb: 4 }}>
+    <AppBar position="sticky" sx={{ mb: 4 }} color="warning">
       <Toolbar sx={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
         <Box sx={{marginRight: '50px;'}}>
           <Typography
@@ -66,8 +69,8 @@ export default function Header({ themeMode, handleTheme }: Props) {
 
         <Box sx={{display: "flex", alignItems: "center"}}>
           <Switch checked={themeMode} onChange={handleTheme} />
-          <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
-            <Badge badgeContent="4" color="secondary">
+          <IconButton component={Link} to="/basket" size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
+            <Badge badgeContent={itemCount} color="secondary">
               <ShoppingCart />
             </Badge>
           </IconButton>

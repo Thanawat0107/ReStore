@@ -3,6 +3,9 @@ using API_Restore.Services.IServices;
 using API_Restore.Services;
 using Microsoft.EntityFrameworkCore;
 using API_Restore.Middleware;
+using API_Restore.Business.Repository.IRepository;
+using API_Restore.Business.Repository;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,9 +20,10 @@ builder.Services.AddDbContext<StoreContext>(opt =>
 {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 
-
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddCors();
 
 var app = builder.Build();
@@ -36,7 +40,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseCors(opt =>
 {
-    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:5173");
+    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:5173");
 });
 
 app.UseHttpsRedirection();
