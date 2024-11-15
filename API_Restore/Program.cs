@@ -24,6 +24,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IFileUpload, FileUpload>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors();
 
 var app = builder.Build();
@@ -32,16 +33,24 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseCors(opt =>
 {
     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:5173");
 });
+//app.UseCors(opt =>
+//{
+//    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://10.103.0.17").SetIsOriginAllowed(x => true);
+//});
+
+app.MapFallbackToController("Index", "Fallback");
+
+app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
@@ -63,4 +72,4 @@ catch (Exception ex)
     logger.LogError(ex, "A problem occurred during migration");
 }
 
-app.Run();
+await app.RunAsync();

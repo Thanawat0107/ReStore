@@ -1,4 +1,3 @@
-import React from "react";
 import { Routes, Route } from "react-router-dom";
 import { HomePage } from "../components/features/home";
 import { Catalog, ProductDetails } from "../components/features/catalog";

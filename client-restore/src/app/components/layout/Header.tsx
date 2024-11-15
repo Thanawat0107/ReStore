@@ -11,7 +11,9 @@ import {
   Typography,
 } from "@mui/material";
 import { Link, NavLink } from "react-router-dom";
-import { useStoreContext } from "../../context/StoreContext";
+import { useAppSelector } from "../../hooks/hooks";
+
+// export const pathHome = "/cs66/react/s07/restore";
 
 interface Props {
   themeMode: boolean;
@@ -19,14 +21,15 @@ interface Props {
 }
 
 const midLinks = [
-  { title: "home", path: "/" },
-  { title: "product", path: "/catalog" },
+  { title: "home", path: `/` },
+  { title: "product", path: `/catalog` },
   // { title: "about", path: "/about" },
-  { title: "contact", path: "/contact" },
+  { title: "contact", path: `/contact` },
 ];
 
 const rightLinks = [
-  { title: "register", path: "/register" },
+  { title: "register", path: `/register` },
+  { title: "login", path: `/login` },
 ];
 
 const navStyles = {
@@ -42,7 +45,7 @@ const navStyles = {
 };
 
 export default function Header({ themeMode, handleTheme }: Props) {
-  const {basket} = useStoreContext();
+  const {basket} = useAppSelector(state => state.basketReducer);
   const itemCount = basket?.basketItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
@@ -52,7 +55,7 @@ export default function Header({ themeMode, handleTheme }: Props) {
           <Typography
             variant="h6"
             component={NavLink}
-            to="/"
+            to={`/`}
             sx={{ color: "inherit", textDecoration: "none", typography: "h6" }}
           >
             E-COMMERCE
@@ -69,7 +72,7 @@ export default function Header({ themeMode, handleTheme }: Props) {
 
         <Box sx={{display: "flex", alignItems: "center"}}>
           <Switch checked={themeMode} onChange={handleTheme} />
-          <IconButton component={Link} to="/basket" size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
+          <IconButton component={Link} to={`/basket`} size="large" edge="start" color="inherit" sx={{ mr: 2 }}>
             <Badge badgeContent={itemCount} color="secondary">
               <ShoppingCart />
             </Badge>

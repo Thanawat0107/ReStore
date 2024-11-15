@@ -9,27 +9,21 @@ import {
 } from "@mui/material";
 import { Product } from "../../../models/productIModel";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import { Apis } from "../../../api/Apis";
 import { LoadingButton } from "@mui/lab";
-import { useStoreContext } from "../../../context/StoreContext";
 import { currencyFormat } from "../../../util/util";
-
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { addBasketItemAsync } from "../../../store/slices/basketSlice";
 
 interface Props {
   product: Product;
 }
 
 export default function ProductCard({ product }: Props) {
-  const [loading, setLoading] = useState(false);
-  const {setBasket} = useStoreContext();
+  const {status} = useAppSelector(state => state.basketReducer);
+  const dispatch = useAppDispatch();
 
-  function handleAddItem(productId: number) {
-    setLoading(true);
-    Apis.Basket.addItem(productId)
-    .then(basket => setBasket(basket))
-    .catch(error => console.log(error))
-    .finally(() => setLoading(false));
+  const handleAddItem = () => {
+    dispatch(addBasketItemAsync({productId: product.id}))
   }
   
   return (
@@ -42,7 +36,7 @@ export default function ProductCard({ product }: Props) {
             height: 200,
             backgroundColor: "#cfd8dc",
           }}
-          image={product.pictureUrl}
+          image={`${product.pictureUrl}`}
           title={product.name}
         />
         <CardContent>
@@ -79,8 +73,8 @@ export default function ProductCard({ product }: Props) {
       </CardActions> */}
       <Box>
         <LoadingButton 
-          loading={loading}
-          onClick={() => handleAddItem(product.id)} 
+          loading={status === 'pendingAddItem' + product.id}
+          onClick={handleAddItem} 
           variant="contained" color="error" fullWidth size="large">
             Add to cart
         </LoadingButton>

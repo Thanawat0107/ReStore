@@ -1,5 +1,4 @@
 import { Typography } from '@mui/material'
-import React from 'react'
 import { useTitle } from '../../../hooks/useTitle';
 
 type Props = {}

@@ -1,13 +1,14 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+/* eslint-disable no-empty-pattern */
 import {
   Box,
   Button,
   Grid,
-  IconButton,
   Paper,
   Table,
   TableBody,
   TableCell,
-  TableContainer,
+  TableContainer, 
   TableHead,
   TableRow,
   Typography,
@@ -15,38 +16,17 @@ import {
 import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
-import { useStoreContext } from "../../../context/StoreContext";
-import { Apis } from "../../../api/Apis";
 import BasketSummary from "./BasketSummary";
 import { currencyFormat } from "../../../util/util";
-import { useState } from "react";
-import { LoadingButton } from "@mui/lab";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks/hooks";
+import { addBasketItemAsync, removeBasketItemAsync } from "../../../store/slices/basketSlice";
 
 type Props = {};
 
 export default function BasketPage({}: Props) {
-  const {basket, setBasket, removeItem} = useStoreContext();
-  const [status, setStatus] = useState({
-    loading: false,
-    name: ''
-  });
-  
-  const handleAddItem = (productId: number, name: string) => {
-    setStatus({loading: true, name});
-    Apis.Basket.addItem(productId)
-      .then(addItem => setBasket(addItem))
-      .catch(error => console.log(error))
-      .finally(() => setStatus({loading: false, name: ''}));
-  }
-
-  const handleRemoveItem = (productId: number, quantity = 1, name: string) => {
-    setStatus({loading: true, name});
-    Apis.Basket.removeItem(productId, quantity)
-      .then(() => removeItem(productId, quantity))
-      .catch(error => console.log(error))
-      .finally(() => setStatus({loading: false, name: ''}));
-  }
+  const {basket} = useAppSelector(state => state.basketReducer);
+  const dispatch = useAppDispatch();
 
   if (!basket)
     return <Typography variant="h3">Your basket is empty</Typography>;
@@ -72,52 +52,55 @@ export default function BasketPage({}: Props) {
                 >
                   <TableCell component="th" scope="row">
                     <Box display='flex' alignItems='center'>
-                      <img src={item.pictureUrl} alt={item.name} style={{width: 80, height: 110, marginRight: 20}}></img>
+                      <img src={`${item.pictureUrl}`} alt={item.name} style={{width: 80, height: 110, marginRight: 20}}></img>
                       <span>{item.name}</span>
                     </Box>
                   </TableCell>
                   <TableCell align="center">{currencyFormat(item.price)}</TableCell>
                   <TableCell align="center">
-                    <LoadingButton 
-                      loading={status.loading && status.name === 'add' + item.productId} 
-                      onClick={() => handleAddItem(item.productId, 'add' + item.productId)} 
+                    <Button 
+                      
+                      onClick={() => dispatch(addBasketItemAsync({productId: item.productId}))} 
                       color="inherit"
                     >
                       <AddCircleIcon />
-                    </LoadingButton>
+                    </Button>
                       {item.quantity}
-                    <LoadingButton 
-                      loading={status.loading && status.name === 'rem' + item.productId} 
-                      onClick={() => handleRemoveItem(item.productId, 1, 'rem' + item.productId)}
+                    <Button 
+                      
+                      onClick={() => dispatch(removeBasketItemAsync({productId: item.productId, quantity: 1}))}
                       color="inherit" 
                     >
                       <RemoveCircleIcon />
-                    </LoadingButton>
+                    </Button>
                   </TableCell>
                   <TableCell align="center">
                     {((item.price / 100) * item.quantity)
                     .toLocaleString("th-TH", {style: "currency",currency: "THB"})}
                   </TableCell>
                   <TableCell align="center">
-                    <LoadingButton  
-                      loading={status.loading && status.name === 'del' + item.productId} 
-                      onClick={() => handleRemoveItem(item.productId, item.quantity, 'del' + item.productId)} 
+                    <Button  
+                       
+                      onClick={() => dispatch(removeBasketItemAsync({productId: item.productId, quantity: item.quantity}))} 
                       color="error"
                     >
                       <RemoveShoppingCartIcon />
-                    </LoadingButton>
+                    </Button>
                   </TableCell>
                 </TableRow>
               ))}
           </TableBody>
         </Table>
+
+        <Grid container>
+          <Grid item xs={12}>
+            <BasketSummary />
+          </Grid>
+        </Grid>
       </TableContainer>
-      <Grid container>
-        <Grid item xs={9} />
-        <Grid item xs={3}>
-          <BasketSummary />
-          <Button component={Link} 
-            to="/checkout"
+      <Box>
+        <Button component={Link}
+            to={`/checkout`}
             variant="contained"
             size="small"
             fullWidth
@@ -126,8 +109,7 @@ export default function BasketPage({}: Props) {
           >
             Checkout
           </Button>
-        </Grid>
-      </Grid>
+      </Box> 
     </>
   );
 }

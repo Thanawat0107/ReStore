@@ -5,13 +5,12 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Typography,
 } from "@mui/material";
-import { useStoreContext } from "../../../context/StoreContext";
 import { currencyFormat } from "../../../util/util";
+import { useAppSelector } from "../../../hooks/hooks";
 
 export default function BasketSummary() {
-  const { basket } = useStoreContext();
+  const { basket } = useAppSelector(state => state.basketReducer);
   const subtotal =
     basket?.basketItems.reduce(
       (sum, item) => sum + item.quantity * item.price,
@@ -24,7 +23,6 @@ export default function BasketSummary() {
       <TableContainer
         component={Paper}
         variant={"outlined"}
-        sx={{ borderRadius: 5 }}
       >
         <Table>
           <TableBody>
@@ -32,23 +30,23 @@ export default function BasketSummary() {
               <TableCell colSpan={2}>Subtotal</TableCell>
               <TableCell align="right">{currencyFormat(subtotal)}</TableCell>
             </TableRow>
-            <TableRow>
+            {/* <TableRow>
               <TableCell colSpan={2}>Delivery fee*</TableCell>
               <TableCell align="right">{currencyFormat(deliveryFee)}</TableCell>
-            </TableRow>
+            </TableRow> */}
             <TableRow>
               <TableCell colSpan={2}>Total</TableCell>
               <TableCell align="right">
                 {currencyFormat(subtotal + deliveryFee)}
               </TableCell>
             </TableRow>
-            <TableRow>
+            {/* <TableRow>
               <TableCell>
                 <span style={{ fontStyle: "italic" }}>
                   *Orders over $100 qualify for free delivery
                 </span>
               </TableCell>
-            </TableRow>
+            </TableRow> */}
           </TableBody>
         </Table>
       </TableContainer>

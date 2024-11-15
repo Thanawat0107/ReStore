@@ -1,9 +1,6 @@
 ﻿using API_Restore.Business.Repository.IRepository;
-using API_Restore.Data;
-using API_Restore.Models;
-using Microsoft.AspNetCore.Http;
+using API_Restore.Business.RequestHelpers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API_Restore.Controllers
 {
@@ -19,9 +16,9 @@ namespace API_Restore.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll([FromQuery] ProductParams? param)
         {
-            return Ok(await _productRepository.GetAll());
+            return Ok(await _productRepository.GetAll(param));
         }
 
         [HttpGet("{id}")]
@@ -33,5 +30,10 @@ namespace API_Restore.Controllers
             return Ok(product);
         }
 
+        [HttpGet("filters")]
+        public async Task<IActionResult> GetFilters() 
+        {
+            return Ok(await _productRepository.GetFilters());
+        }
     }
 }
